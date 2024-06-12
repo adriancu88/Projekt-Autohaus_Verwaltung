@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suchergebnisse</title>
+</head>
+<body>
+    <h2>Suchergebnisse</h2>
+    {% if customer_info %}
+        <p>Vorname: {{ customer_info[1] }}</p>
+        <p>Nachname: {{ customer_info[2] }}</p>
+        <p>Adresse: {{ customer_info[3] }}</p>
+        <p>Telefon: {{ customer_info[4] }}</p>
+    {% else %}
+        <p>Kundenname nicht im System zu finden.</p>
+    {% endif %}
+</body>
+</html>
