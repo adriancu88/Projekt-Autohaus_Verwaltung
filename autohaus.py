@@ -26,26 +26,30 @@ def search():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    query = "SELECT * FROM Kunden WHERE Nachname = %s"
+    query = query = """
+    SELECT k.kundeid, k.vorname, k.nachname, k.adresse, k.telefonnummer, 
+           v.rechnungsnummer, v.verkaufsdatum,
+           f.marke, f.modell, f.farbe, f.preis,
+           w.beschreibung, w.kosten, w.datum
+    FROM Kunden k
+    LEFT JOIN Verkaeufe v ON k.kundeid = v.kundeid
+    LEFT JOIN Fahrzeuge f ON v.fahrzeugid = f.fahrzeugid
+    LEFT JOIN Wartungen w ON f.fahrzeugid = w.fahrzeugid
+    WHERE k.nachname = %s
+    """
+
     params = (search_term,)
 
     cursor.execute(query, params)
     customer_info = cursor.fetchone()
 
-    if customer_info:
-        print("Kundendaten abgerufen:")
-        print("Vorname:", customer_info[1])
-        print("Nachname:", customer_info[2])
-        print("Adresse:", customer_info[3])
-        print("Telefonnummer:", customer_info[4])
-        print("Email:", customer_info[5])
-    else:
-        print("Kundenname nicht im System zu finden.")
-
     cursor.close()
     conn.close()
 
-    return render_template('search_results.html', customer_info=customer_info)
+    if customer_info:
+        return render_template('search_results.html', customer_info=customer_info)
+    else:
+        return render_template('search_results.html', not_found=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
