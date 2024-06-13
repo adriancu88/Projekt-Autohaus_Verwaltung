@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autohaus Verwaltungssystem</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
 
-<h1>Autohaus Verwaltungssystem</h1>
+<header>
+    <h1>Autohaus Verwaltungssystem</h1>
+</header>
 
-<form action="/search" method="post" class="form-container">
-    <label for="search_term">Kundenname eingeben:</label><br>
-    <input type="text" id="search_term" name="search_term"><br>
-    <input type="submit" value="Search">
-</form>
+<main>
+    <form action="/search" method="post" class="form-container">
+        <label for="search_term"><strong>Kundenname eingeben:</strong></label><br>
+        <input type="text" id="search_term" name="search_term"><br>
+        <input type="submit" value="Suchen">
+    </form>
+</main>
 
 </body>
 </html>

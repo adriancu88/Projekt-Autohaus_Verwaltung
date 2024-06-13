@@ -26,7 +26,7 @@ def search():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    query = query = """
+    query = """
     SELECT k.kundeid, k.vorname, k.nachname, k.adresse, k.telefonnummer, 
            v.rechnungsnummer, v.verkaufsdatum,
            f.marke, f.modell, f.farbe, f.preis,
@@ -37,7 +37,6 @@ def search():
     LEFT JOIN Wartungen w ON f.fahrzeugid = w.fahrzeugid
     WHERE k.nachname = %s
     """
-
     params = (search_term,)
 
     cursor.execute(query, params)
